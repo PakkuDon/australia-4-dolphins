@@ -5,14 +5,19 @@ import React from 'react';
 import Header from './Header';
 import Banner from './Banner';
 import Footer from './Footer';
-import VideoList from './VideoList';
+import PastVideos from './PastVideos';
 import VideoForm from './VideoForm';
+import About from './About';
+
+var testData = [
+];
 
 class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisible: false
+      formVisible: false,
+      
     };
     
     this.hideForm = this.hideForm.bind(this);
@@ -33,10 +38,11 @@ class AppComponent extends React.Component {
   
   render() {
     return (
-      <div className="index">
+      <div className="container index">
         <Header />
         <Banner onAdd={this.showForm} />
-        <VideoList />
+        <PastVideos videos={testData} />
+        <About />
         <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
         <Footer />
       </div>

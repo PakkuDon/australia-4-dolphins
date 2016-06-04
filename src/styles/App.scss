@@ -1,6 +1,5 @@
 /* Base Application Styles */
 $brandColor: #009FE2;
-$white: #FFF;
 
 html, 
 body {
@@ -11,29 +10,53 @@ body {
 header,
 footer {
   background-color: $brandColor;
-  color: $white;
+  color: #FFF;
   padding: 10px 20px;
   
   a {
-    color: $white;
+    color: #FFF;
     text-decoration: none;
   }
 }
 
-.index { 
-  img {
-    margin: 40px auto;
-    border-radius: 4px;
-    background: #fff;
-    display: block;
+.banner {
+  background: url('../images/mb20.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  color: #FFF;
+  
+  .statistics {
+    background-color: #EEE;
+    color: #000;
+    padding: 5px 10px;
+    
+    p {
+      margin: 0;
+    }
   }
   
-  .notice {
-    margin: 20px auto;
-    padding: 15px 0;
+  .record-btn {
+    width: 100%;
     text-align: center;
-    border: 1px solid #000;
-    border-width: 1px 0;
-    background: #666;
+    background-color: #F80;
+    text-transform: uppercase;
+    border-color: transparent;
+    padding: 20px 10px;
+    font-size: 200%;
+    
+    &:hover,
+    &:active {
+      background-color: #FA0;
+    }
   }
+}
+
+.about {
+  border: 1px solid #EEE;
+  padding: 50px;
+}
+
+footer {
+  margin-top: 20px;
 }
