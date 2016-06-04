@@ -7,13 +7,28 @@
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
       "type": "string",
       "required": true
     },
     "email": {
       "type": "string",
       "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "post_code": {
+      "type": "number",
+      "required": true
+    },
+    "phone":  {
+      "type": "string"
     },
     "location": {
       "type": "geopoint"
