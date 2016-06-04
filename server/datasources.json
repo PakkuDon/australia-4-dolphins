@@ -1,0 +1,12 @@
+{
+  "postgres": {
+    "host": "localhost",
+    "port": 5432,
+    "url": "postgres://postgres@localhost/a4d",
+    "database": "a4d",
+    "password": "",
+    "name": "postgres",
+    "user": "postgres",
+    "connector": "postgresql"
+  }
+}
