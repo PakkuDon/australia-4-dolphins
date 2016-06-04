@@ -399,6 +399,40 @@
                             recordingPlayer.onended = function() {
                                 recordingPlayer.pause();
                                 recordingPlayer.src = URL.createObjectURL(button.recordRTC.blob);
+                                console.log('something');
+                                console.log(button.recordRTC.blob);
+                                var file = new File([button.recordRTC.blob], "video.mp4");
+                                console.log(file);
+
+                                var getToken = function (url, refresh){
+                                var token_xhr = new XMLHttpRequest();
+                                token_xhr.onreadystatechange = function()
+                                {
+                                  if (token_xhr.readyState == 4 && token_xhr.status == 200)
+                                  {
+                                    var token = JSON.parse(token_xhr.responseText)['token'];
+                                    console.log(token);
+                                    console.log(token_xhr.responseText);
+                                    var invocation = new XMLHttpRequest();
+                                    invocation.onreadystatechange = function() {
+                                      if (invocation.status == 401) {
+                                        
+
+                                      }
+                                      else if (invocation.readyState == 4 && invocation.status == 200) {
+
+                                      }
+
+
+                                    };
+                                    invocation.open('POST', "https://www.googleapis.com/upload/youtube/v3/videos?part=snippet", true);
+                                    invocation.setRequestHeader('Authorization', 'Bearer ' + token);
+                                    invocation.send(file);
+                                  }
+                                };
+                                token_xhr.open('GET','/api/token');
+                                token_xhr.send();
+
                             };
                         };
                         
