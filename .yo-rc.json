@@ -1,0 +1,8 @@
+{
+  "generator-react-webpack": {
+    "appName": "australia4Dolphins",
+    "style": "sass",
+    "postcss": true,
+    "generatedWithVersion": 3
+  }
+}
