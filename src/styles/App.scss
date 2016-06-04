@@ -93,3 +93,20 @@ footer {
 footer {
   margin-top: 20px;
 }
+
+.signatures {
+  
+  .video-player {
+    height: 400px;
+  }
+  
+  .grid {
+    overflow-y: auto;
+    height: 400px;
+    .thumbnail {
+      display: inline-block;
+      width: 40%;
+      margin-left: 1em;
+    }
+  }
+}

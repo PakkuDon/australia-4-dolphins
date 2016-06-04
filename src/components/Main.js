@@ -5,11 +5,32 @@ import React from 'react';
 import Header from './Header';
 import Banner from './Banner';
 import Footer from './Footer';
-import PastVideos from './PastVideos';
+import SignatureList from './SignatureList';
 import VideoForm from './VideoForm';
 import About from './About';
 
 var testData = [
+  {
+    url: 'https://www.youtube.com/watch?v=M3hFN8UrBPw'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=7kvmPh2nYBM'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=hdG-e_Joc8Q'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=-zA1jRmAYfU'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=sI8NsYIyQ2A'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=y2Ky3Wo37AY'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=-2xuO8JBepM'
+  },
 ];
 
 class AppComponent extends React.Component {
@@ -17,7 +38,7 @@ class AppComponent extends React.Component {
     super(props);
     this.state = {
       formVisible: false,
-      
+      videos: testData
     };
     
     this.hideForm = this.hideForm.bind(this);
@@ -41,7 +62,7 @@ class AppComponent extends React.Component {
       <div className="container index">
         <Header />
         <Banner onAdd={this.showForm} />
-        <PastVideos videos={testData} />
+        <SignatureList videos={this.state.videos} />
         <About />
         <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
         <Footer />
