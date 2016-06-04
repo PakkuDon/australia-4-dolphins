@@ -8,6 +8,9 @@ import './gumadapter';
 import { captureUserMedia} from './AppUtils';
 import Webcam from './Webcam.react';
 //import RecordRTC from 'recordrtc';
+//import { access_token, refresh_token } from '../../cfg/token';
+//var tokens=require('../../cfg/token');
+var tokens = require('../../cfg/token');
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia || navigator.msGetUserMedia);
@@ -94,6 +97,36 @@ class RTCVideo extends React.Component {
         alert(error, 'error occurred. check your aws settings and try again.')
       })
       */
+      var ReactClass = this;
+      var invocation = new XMLHttpRequest();
+      invocation.onreadystatechange = function(){
+        if (invocation.status == 401) {
+          console.log('Fucked up');
+          ReactClass.setState({ uploading: false, uploadSuccess: false, src: null });
+        }
+        else if (invocation.readyState == 4 && invocation.status == 200) {
+          console.log('Awesome stuff');
+          ReactClass.setState({ uploading: false, uploadSuccess: true, src: null });
+        }
+      };
+      console.log(process.env);
+      var videoFile =  new File([this.state.recordVideo.blob], "video.mp4");
+      var token = tokens.access_token;
+      console.log(token);
+      invocation.open('POST', "https://www.googleapis.com/upload/youtube/v3/videos?part=snippet", true);
+      invocation.setRequestHeader('Authorization', 'Bearer ' + token);
+      invocation.send(videoFile);
+      /*
+      var parameters = JSON.stringify({
+        "snippet": { "title": "testing123"  },
+        "status": { "privacyStatus": "public"  }
+      });
+      var jsonBlob = new Blob([ parameters ], { "type" : "application\/json" });
+      var fd = new FormData();
+      fd.append("snippet", jsonBlob, "file.json");
+      fd.append("file", videoFile);
+      invocation.send(fd);
+      */
     });
   }
 
@@ -103,6 +136,11 @@ class RTCVideo extends React.Component {
         <Webcam src={this.state.src}/>
         {this.state.uploading ?
           <div>Uploading...</div> : null}
+        {this.state.uploadSuccess==true ?
+          <div>Upload successful :=)</div> : null}
+        {this.state.uploadSuccess==false ?
+          <div>Upload failed :=(</div> : null}
+
         <div className="row">
           <Button bsStyle='primary' disabled={this.state.isRecording} onClick={this.startRecord}>Start Record</Button>
           <Button bsStyle='danger' disabled={!this.state.isRecording} onClick={this.stopRecord}>Stop Record</Button>
