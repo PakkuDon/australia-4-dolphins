@@ -37,6 +37,15 @@ class RTCVideo extends React.Component {
     this.requestUserMedia();
   }
 
+  componentWillReceiveProps(props) {
+    console.log(props.captureDevice);
+    if (!props.captureDevice){
+      console.log('setting src to null');
+      this.setState({src: null});
+    }
+  }
+
+
   requestUserMedia() {
     console.log('requestUserMedia')
     captureUserMedia((stream) => {
@@ -70,7 +79,7 @@ class RTCVideo extends React.Component {
         id: Math.floor(Math.random()*90000) + 10000
       }
 
-      this.setState({ uploading: true, isRecording: false });
+      this.setState({ uploading: true, isRecording: false, src: URL.createObjectURL(this.state.recordVideo.blob) });
 
       // Upload to Youtube TODO
       /*
