@@ -1,16 +1,44 @@
 require('normalize.css/normalize.css');
-require('styles/App.css');
+require('styles/App.scss');
 
 import React from 'react';
-
-let yeomanImage = require('../images/yeoman.png');
+import Header from './Header';
+import Banner from './Banner';
+import Footer from './Footer';
+import VideoList from './VideoList';
+import VideoForm from './VideoForm';
 
 class AppComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formVisible: false
+    };
+    
+    this.hideForm = this.hideForm.bind(this);
+    this.showForm = this.showForm.bind(this);
+  }
+  
+  hideForm() {
+    this.setState({
+      formVisible: false
+    });
+  }
+  
+  showForm() {
+    this.setState({
+      formVisible: true
+    });
+  }
+  
   render() {
     return (
       <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+        <Header />
+        <Banner onAdd={this.showForm} />
+        <VideoList />
+        <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
+        <Footer />
       </div>
     );
   }
