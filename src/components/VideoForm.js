@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import UserForm from './UserForm';
 
 class VideoForm extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class VideoForm extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <video controls></video>
+          <UserForm></UserForm>
         </Modal.Body>
         <Modal.Footer>
           <Button bsStyle='primary' onClick={this.submitVideo}>Submit</Button>
