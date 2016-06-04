@@ -1,33 +1,14 @@
 import React from 'react';
-import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Button, Jumbotron } from 'react-bootstrap';
 
 class Banner extends React.Component {
   render() {
     return (
       <Jumbotron className='banner'>
-        <Row className='show-grid'>
-          <Col xs={12}>
-            <h2 className='text-center'>Mike, do right by dolphins!</h2>
-          </Col>
-        </Row>
-        <Row>&nbsp;</Row>
-        <Row>
-          <Col sm={6}>
-            <div>
-              <button className='record-btn' onClick={this.props.onAdd}>Record</button>
-            </div>
-            <p className='text-center'>
-              Record your video for Mike Baird
-            </p>
-          </Col>
-          <Col sm={6}>
-            <div className='statistics'>
-              <p>1,345 Video Petitions</p>
-              <p>8,323 Total Hours of Video</p>
-              <p>543 Petitions from NSW</p>
-            </div>
-          </Col>
-        </Row>
+            <h1 className='text-center'>Mike, do right by dolphins!</h1>
+            <h2 className='text-center'><span className='count'>1,345</span></h2>
+            <p className='text-center'>people want Mike to pass legislation to ban dolphin captivity</p>
+            <button className='record-btn center-block' onClick={this.props.onAdd}>Add your video for Mike</button>
       </Jumbotron>
     );
   }

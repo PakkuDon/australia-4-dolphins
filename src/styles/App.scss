@@ -1,10 +1,13 @@
 /* Base Application Styles */
 $brandColor: #009FE2;
+$activeColor: #F80;
 
 html, 
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 110%;
 }
 
 header,
@@ -25,29 +28,51 @@ footer {
   background-position: center;
   height: 400px;
   color: #FFF;
+  position: relative;
+  margin-bottom: 3em;
   
-  .statistics {
-    background-color: #EEE;
-    color: #000;
-    padding: 5px 10px;
-    
-    p {
-      margin: 0;
-    }
+  h1 {
+    margin: 0px 10px;
+    font-weight: bold;
+  }
+  
+  .count {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    color: #F90;
   }
   
   .record-btn {
-    width: 100%;
     text-align: center;
-    background-color: #F80;
+    background-color: $activeColor;
     text-transform: uppercase;
-    border-color: transparent;
-    padding: 20px 10px;
+    border: 5px solid darken($activeColor, 5%);
+    padding: 0.5em 2em;
     font-size: 200%;
+    margin-top: 2.5em;
     
     &:hover,
     &:active {
-      background-color: #FA0;
+      background-color: lighten($activeColor, 10%);
+    }
+  }
+  
+  @media (max-width: 1200px) {
+    .record-btn {
+      margin-top: 2em;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .record-btn {
+      margin-top: 1em;
+    }
+  }
+  
+  @media (max-width: 750px) {
+    .record-btn {
+      font-size: 125%;
     }
   }
 }
