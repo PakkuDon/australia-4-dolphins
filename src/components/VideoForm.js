@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import UserForm from './UserForm';
+import RTCVideo from './RTCVideo';
 
 class VideoForm extends React.Component {
   constructor(props) {
@@ -14,13 +15,12 @@ class VideoForm extends React.Component {
   
   render() {
     return (
-      <Modal show={this.props.visible} onHide={this.props.onHide}>
+      <Modal show={this.props.visible} onHide={this.props.onHide} dialogClassName="my-modal">
         <Modal.Header>
-          <Modal.Title>Record video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <video controls></video>
-          <UserForm></UserForm>
+          <RTCVideo></RTCVideo>
+          {/* <UserForm></UserForm> */}
         </Modal.Body>
         <Modal.Footer>
           <Button bsStyle='primary' onClick={this.submitVideo}>Submit</Button>
@@ -31,3 +31,22 @@ class VideoForm extends React.Component {
 }
 
 export default VideoForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
