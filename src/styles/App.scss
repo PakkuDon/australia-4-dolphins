@@ -109,4 +109,17 @@ footer {
       margin-left: 1em;
     }
   }
+  
+  @media (max-width: 767px) {
+    .video-player {
+      height: auto;
+    }
+    
+    .grid {
+      height: auto;
+      & .thumbnail {
+        width: 20%;
+      }
+    }
+  }
 }
