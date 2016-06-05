@@ -38,7 +38,7 @@ class AppComponent extends React.Component {
     super(props);
     this.state = {
       formVisible: false,
-      videos: testData
+      videos: [{url:''}]
     };
     
     this.hideForm = this.hideForm.bind(this);
