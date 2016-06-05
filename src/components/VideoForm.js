@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import InstructionsPage from './InstructionsPage';
 import UserForm from './UserForm';
 import RTCVideo from './RTCVideo';
 
@@ -14,6 +15,7 @@ class VideoForm extends React.Component {
     this.state = {
       video_url: '',
       panels: [
+        <InstructionsPage />,
         <RTCVideo captureDevice={this.props.formVisible} onEndRecording={this.handleEndRecording}></RTCVideo>,
         <UserForm dataCb={this.getData}> </UserForm>
       ],
