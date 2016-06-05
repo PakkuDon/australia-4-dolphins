@@ -44,6 +44,16 @@ class AppComponent extends React.Component {
     this.hideForm = this.hideForm.bind(this);
     this.showForm = this.showForm.bind(this);
   }
+
+  componentDidMount() {
+    var ReactClass = this;
+    console.log('I mounted')
+    $.get('https://0.0.0.0:3000/api/videos')
+      .done(function(data){
+        console.log(data);
+        ReactClass.setState({videos: data});
+      });
+  }
   
   hideForm() {
     this.setState({
