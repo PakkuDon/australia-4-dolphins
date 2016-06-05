@@ -38,12 +38,12 @@ class VideoForm extends React.Component {
     var post_data = {};
     post_data['url'] = this.state.video_url;
     post_data['created'] = new Date();
-    post_data['first_name'] = fd['firstName'];
-    post_data['last_name'] = fd['lastName'];
-    post_data['email'] = fd['email'];
-    post_data['country'] = fd['country'];
+    post_data['first_name'] = fd['firstName'] || 'Some Name';
+    post_data['last_name'] = fd['lastName'] || 'Some Last';
+    post_data['email'] = fd['email'] || 'def@def.com';
+    post_data['country'] = fd['country'] || 'AU';
     post_data['phone'] = fd['phone'];
-    post_data['post_code'] = fd['postCode'];
+    post_data['post_code'] = fd['postCode'] || '3000';
     console.log(post_data);
     // POST to API
     $.post('https://0.0.0.0:3000/api/videos/', post_data)

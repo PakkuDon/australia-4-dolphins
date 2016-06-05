@@ -20,9 +20,11 @@ class SignatureList extends React.Component {
   }
   
   render() {
-    this.state = {
-      current: this.props.videos[0]
-    };
+    if (this.props.videos.length === 1){
+      this.state = {
+        current: this.props.videos[0]
+      };
+    }
     var thumbnails = this.props.videos.map((video) => {
       return (
         <SignatureThumbnail key={video.url} video={video} onVideoSelect={this.selectVideo} />
