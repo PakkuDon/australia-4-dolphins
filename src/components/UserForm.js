@@ -15,6 +15,8 @@ class UserForm extends React.Component {
 
   onChange(formValue) {
     this.setState({formValue})
+    this.props.dataCb(formValue);
+    //console.log(formValue)
   }
 
   render() {

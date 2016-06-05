@@ -106,6 +106,8 @@ class RTCVideo extends React.Component {
         }
         else if (invocation.readyState == 4 && invocation.status == 200) {
           console.log('Awesome stuff');
+          //var id = (invocation.responseText['id']);
+          console.log(JSON.parse(invocation.responseText)['id']);
           ReactClass.setState({ uploading: false, uploadSuccess: true, src: null });
         }
       };
