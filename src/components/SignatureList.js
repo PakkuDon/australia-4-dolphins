@@ -32,7 +32,7 @@ class SignatureList extends React.Component {
         <h2 className='text-center'>Recent Signatures</h2>
         <Row>
           <Col sm={7} className='video-player'>
-            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${currentVideoID}`} frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="315" src={`https://www.youtube.com/embed/${currentVideoID}`} frameborder="0" allowfullscreen></iframe>
           </Col>
           <Col sm={5} className='grid'>
             {thumbnails}
