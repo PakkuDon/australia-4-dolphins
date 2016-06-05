@@ -40,38 +40,45 @@ class AppComponent extends React.Component {
       formVisible: false,
       videos: [{url:''}]
     };
-    
+
     this.hideForm = this.hideForm.bind(this);
     this.showForm = this.showForm.bind(this);
+    this.updateVideos = this.updateVideos.bind(this);
   }
 
-  componentDidMount() {
+  updateVideos() {
     var ReactClass = this;
-    console.log('I mounted')
     $.get('https://0.0.0.0:3000/api/videos')
       .done(function(data){
         console.log(data);
         ReactClass.setState({videos: data});
       });
   }
-  
+
+  componentDidMount() {
+    var ReactClass = this;
+    console.log('I mounted')
+    this.updateVideos();
+    setInterval(this.updateVideos, 3000);
+  }
+
   hideForm() {
     this.setState({
       formVisible: false
     });
   }
-  
+
   showForm() {
     this.setState({
       formVisible: true
     });
   }
-  
+
   render() {
     return (
       <div className="container index">
         <Header />
-        <Banner onAdd={this.showForm} />
+        <Banner onAdd={this.showForm} count={this.state.videos.length} />
         <SignatureList videos={this.state.videos} />
         <About />
         <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
