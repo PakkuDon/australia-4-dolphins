@@ -1,9 +1,9 @@
 require('normalize.css/normalize.css');
 require('styles/App.scss');
+require('jquery');
 
 import React from 'react';
 import Header from './Header';
-import Banner from './Banner';
 import Footer from './Footer';
 import SignatureList from './SignatureList';
 import VideoForm from './VideoForm';
@@ -48,7 +48,7 @@ class AppComponent extends React.Component {
 
   updateVideos() {
     var ReactClass = this;
-    $.get('https://0.0.0.0:3000/api/videos')
+    $.get('https://localhost:3000/api/videos')
       .done(function(data){
         console.log(data);
         ReactClass.setState({videos: data});
@@ -77,8 +77,7 @@ class AppComponent extends React.Component {
   render() {
     return (
       <div className="container index">
-        <Header />
-        <Banner onAdd={this.showForm} count={this.state.videos.length} />
+        <Header onAdd={this.showForm} count={this.state.videos.length} />
         <SignatureList videos={this.state.videos} />
         <About />
         <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />

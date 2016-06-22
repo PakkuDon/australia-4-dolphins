@@ -48,7 +48,7 @@ class VideoForm extends React.Component {
     post_data['post_code'] = fd['postCode'] || '3000';
     console.log(post_data);
     // POST to API
-    $.post('https://0.0.0.0:3000/api/videos/', post_data)
+    $.post('https://localhost:3000/api/videos/', post_data)
       .done(function(){
         console.log('Sucess!');
       });
