@@ -1,15 +1,11 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-import RecordRTC from './RecordRTC';
-import './gumadapter';
+import RecordRTC from 'recordrtc';
+import 'gumadapter';
 
-//import { captureUserMedia, S3Upload } from './AppUtils';
-import { captureUserMedia} from './AppUtils';
+import { captureUserMedia } from './AppUtils';
 import Webcam from './Webcam.react';
-//import RecordRTC from 'recordrtc';
-//import { access_token, refresh_token } from '../../cfg/token';
-//var tokens=require('../../cfg/token');
 var tokens = require('../../cfg/token');
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||

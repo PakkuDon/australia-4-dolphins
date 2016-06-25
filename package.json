@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "core-js": "^2.0.0",
+    "gumadapter": "^1.0.0",
     "jquery": "^3.0.0",
     "normalize.css": "^4.0.0",
     "odometer": "^0.4.7",
@@ -73,6 +74,7 @@
     "react-bootstrap": "^0.29.4",
     "react-d3-map": "^0.8.3",
     "react-dom": "^15.0.0",
-    "react-forms": "beta"
+    "react-forms": "beta",
+    "recordrtc": "^5.3.8"
   }
 }

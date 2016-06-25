@@ -1,8 +1,8 @@
-import './gumadapter';
+import 'gumadapter';
 export function captureUserMedia(callback) {
-    var params = { audio: true, video: true };
+  var params = { audio: true, video: true };
 
-      navigator.getUserMedia(params, callback, (error) => {
-            alert(JSON.stringify(error));
-              });
-};
+  navigator.getUserMedia(params, callback, (error) => {
+    alert(JSON.stringify(error));
+  });
+}

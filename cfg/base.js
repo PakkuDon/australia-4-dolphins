@@ -36,7 +36,8 @@ module.exports = {
       stores: `${defaultSettings.srcPath}/stores/`,
       styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV,
-      jquery: 'jquery/src/jquery'
+      jquery: 'jquery/src/jquery',
+      gumadapter: 'gumadapter/gumadapter'
     }
   },
   module: {}
