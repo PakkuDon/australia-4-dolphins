@@ -8,6 +8,7 @@ class VideoForm extends React.Component {
   constructor(props) {
     super(props);
     this.getData = this.getData.bind(this);
+    this.reset = this.reset.bind(this);
     this.submitVideo = this.submitVideo.bind(this);
     this.next = this.next.bind(this);
     this.handleEndRecording = this.handleEndRecording.bind(this);
@@ -24,18 +25,20 @@ class VideoForm extends React.Component {
     }
   }
 
+  reset() {
+    this.setState({
+      current: 0,
+      video_url: '',
+      formData: {}
+    });
+  }
+
   getData(formValue) {
     this.setState({formData: formValue.value})
   }
 
-  
   // Add signature to DB, reset form
   submitVideo() {
-    this.props.onHide();
-    this.setState({
-      video_url: '',
-      current: 0
-    });
     var fd = this.state.formData;
     var post_data = {};
     post_data['url'] = this.state.video_url;
@@ -49,10 +52,10 @@ class VideoForm extends React.Component {
     console.log(post_data);
     // POST to API
     $.post('https://localhost:3000/api/videos/', post_data)
-      .done(function(){
+      .done(() => {
         console.log('Sucess!');
-      });
-
+    });
+    this.props.onHide();
   }
   
   next() {
@@ -71,17 +74,17 @@ class VideoForm extends React.Component {
     var nextBtn = this.state.current < this.state.panels.length - 1? 
       { handler: this.next, text: 'Next' } : 
       { handler: this.submitVideo, text: 'Submit video' };
-    console.log(`current: ${this.state.current}, panel length: ${this.state.panels.length}`);
     
     return (
-      <Modal backdrop='static' show={this.props.visible} onHide={this.props.onHide} dialogClassName="my-modal">
-        <Modal.Header>
+      <Modal backdrop='static' show={this.props.visible} 
+        onHide={this.props.onHide} onExited={this.reset} dialogClassName="my-modal">
+        <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
           {this.state.panels[this.state.current]}
         </Modal.Body>
         <Modal.Footer>
-          <Button bsStyle='danger' onClick={this.submitVideo}>Cancel</Button>
+          <Button bsStyle='danger' onClick={this.props.onHide}>Cancel</Button>
           <Button bsStyle='primary' onClick={nextBtn.handler}>{nextBtn.text}</Button>
         </Modal.Footer>
       </Modal>

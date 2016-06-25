@@ -71,6 +71,7 @@
     "odometer": "^0.4.7",
     "react": "^15.0.0",
     "react-bootstrap": "^0.29.4",
+    "react-d3-map": "^0.8.3",
     "react-dom": "^15.0.0",
     "react-forms": "beta"
   }

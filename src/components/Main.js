@@ -6,6 +6,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import SignatureList from './SignatureList';
+import SignatureMap from './SignatureMap';
 import VideoForm from './VideoForm';
 import About from './About';
 
@@ -80,6 +81,7 @@ class AppComponent extends React.Component {
         <Header onAdd={this.showForm} count={this.state.videos.length} />
         <SignatureList videos={this.state.videos} />
         <About />
+        <SignatureMap />
         <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
         <Footer />
       </div>

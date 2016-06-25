@@ -26,7 +26,7 @@ class UserForm extends React.Component {
         <Field select="lastName" label="Last name" />
         <Field select="email" label="Email"/>
         <Field select="country" label="Country"/>
-        <Field select="postCode" label="Post Code"/>
+        <Field select="postCode" label="Post code"/>
         <Field select="phone" label="Phone"/>
       </Fieldset>
       // Location, url, created are auto added

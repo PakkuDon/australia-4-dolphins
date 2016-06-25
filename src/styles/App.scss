@@ -10,23 +10,14 @@ body {
   font-size: 110%;
 }
 
-header,
-footer {
-  background-color: $brandColor;
-  color: #FFF;
-  padding: 10px 20px;
-  
-  a {
-    color: #FFF;
-    text-decoration: none;
-  }
+.subheading {
+  width: 80%;
 }
 
 .banner {
   background: url('../images/mb20.jpg');
   background-size: cover;
   background-position: center;
-  height: 400px;
   color: #FFF;
   position: relative;
   margin-bottom: 3em;
@@ -127,4 +118,15 @@ footer {
 .icon {
   width: 32px;
   height: 32px;
+}
+
+footer {
+  background-color: $brandColor;
+  color: #FFF;
+  padding: 10px 20px;
+  
+  a {
+    color: #FFF;
+    text-decoration: none;
+  }
 }
