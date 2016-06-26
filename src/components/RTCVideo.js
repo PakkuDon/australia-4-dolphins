@@ -20,7 +20,8 @@ class RTCVideo extends React.Component {
       recordVideo: null,
       src: null,
       uploadSuccess: null,
-      uploading: false
+      uploading: false,
+      stream: null
     };
 
     this.requestUserMedia = this.requestUserMedia.bind(this);
@@ -36,6 +37,10 @@ class RTCVideo extends React.Component {
     this.requestUserMedia();
   }
 
+  componentWillUnmount() {
+    this.state.stream.stop();
+  }
+
   componentWillReceiveProps(props) {
     console.log(props.captureDevice);
     if (!props.captureDevice){
@@ -44,33 +49,39 @@ class RTCVideo extends React.Component {
     }
   }
 
-
   requestUserMedia() {
-    console.log('requestUserMedia')
     captureUserMedia((stream) => {
-      this.setState({ src: window.URL.createObjectURL(stream) });
-      console.log('setting state', this.state)
+      this.setState({ 
+        src: window.URL.createObjectURL(stream),
+        stream: stream 
+      });
     });
   }
 
   startRecord() {
+    this.state.stream.stop();
     captureUserMedia((stream) => {
+      this.setState({ 
+        src: window.URL.createObjectURL(stream),
+        stream: stream,
+        isRecording: true
+      });
       this.state.recordVideo = RecordRTC(stream, { type: 'video' });
       this.state.recordVideo.startRecording();
-      this.setState({ isRecording: true});
     });
 
     this.timeout = setTimeout(() => {
       this.stopRecord();
-      this.timeout=null;
+      this.timeout = null;
     }, 30000);
   }
 
   stopRecord() {
+    this.state.stream.stop();
     this.state.recordVideo.stopRecording(() => {
       if (this.timeout){
         clearTimeout(this.timeout);
-        this.timeout=null;
+        this.timeout = null;
       }
       let params = {
         type: 'video/webm',
@@ -78,33 +89,23 @@ class RTCVideo extends React.Component {
         id: Math.floor(Math.random()*90000) + 10000
       }
 
-      this.setState({ uploading: true, isRecording: false, src: URL.createObjectURL(this.state.recordVideo.blob) });
+      this.setState({ 
+        uploading: true, 
+        isRecording: false, 
+        src: URL.createObjectURL(this.state.recordVideo.blob) 
+      });
 
-      // Upload to Youtube TODO
-      /*
-      S3Upload(params)
-      .then((success) => {
-        console.log('enter then statement')
-        if(success) {
-          console.log(success)
-          this.setState({ uploadSuccess: true, uploading: false });
-        }
-      }, (error) => {
-        alert(error, 'error occurred. check your aws settings and try again.')
-      })
-      */
-      var ReactClass = this;
       var invocation = new XMLHttpRequest();
       invocation.onreadystatechange = () => {
         if (invocation.status == 401) {
           console.log('Fucked up');
-          ReactClass.setState({ uploading: false, uploadSuccess: false, src: null });
+          this.setState({ uploading: false, uploadSuccess: false, src: null });
         }
         else if (invocation.readyState == 4 && invocation.status == 200) {
           console.log('Awesome stuff');
           var id = JSON.parse(invocation.responseText)['id'];
-          ReactClass.props.onEndRecording(id);
-          ReactClass.setState({ uploading: false, uploadSuccess: true, src: null });
+          this.props.onEndRecording(id);
+          this.setState({ uploading: false, uploadSuccess: true, src: null });
         }
       };
       console.log(process.env);
