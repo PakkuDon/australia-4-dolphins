@@ -7,7 +7,7 @@ class SignatureList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: this.props.videos[0]
+      current: null
     };
     
     this.selectVideo = this.selectVideo.bind(this);
@@ -18,23 +18,26 @@ class SignatureList extends React.Component {
       current: video
     });
   }
+
+  // Set current video after data loads
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.current === null && nextProps.videos.length > 0) {
+      this.setState({
+        current: nextProps.videos[0]
+      });
+    }
+  }
   
   render() {
-    if (this.props.videos.length === 1){
-      this.state = {
-        current: this.props.videos[0]
-      };
-    }
     var thumbnails = this.props.videos.map((video) => {
       return (
         <SignatureThumbnail key={video.url} video={video} onVideoSelect={this.selectVideo} />
       );
     });
-    var currentVideoID = url.parse(this.state.current.url, true).query.v;
-    
-    return (
-      <div className='signatures'>
-        <h2 className='text-center'>Recent Signatures</h2>
+    var content = '';
+    if (this.state.current) {
+      let currentVideoID = url.parse(this.state.current.url, true).query.v;
+      content = (
         <Row>
           <Col sm={7} className='video-player'>
             <iframe width="100%" height="315" src={`https://www.youtube.com/embed/${currentVideoID}`} frameborder="0" allowfullscreen></iframe>
@@ -43,6 +46,22 @@ class SignatureList extends React.Component {
             {thumbnails}
           </Col>
         </Row>
+      );
+    }
+    else {
+      content = (
+        <Row>
+          <Col sm={12}>
+            Loading...
+          </Col>
+        </Row>
+      );
+    }
+    
+    return (
+      <div className='signatures'>
+        <h2 className='text-center'>Recent Signatures</h2>
+        {content}
       </div>
     );
   }

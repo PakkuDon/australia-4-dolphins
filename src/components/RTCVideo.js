@@ -98,7 +98,11 @@ class RTCVideo extends React.Component {
       var invocation = new XMLHttpRequest();
       invocation.onreadystatechange = () => {
         if (invocation.status == 401) {
-          console.log('Fucked up');
+          console.log('Upload error');
+          // TODO: Error handling
+          // TODO: Remove arbitrary ID - used for testing purposes only
+          var videoID = Math.random().toString(36).substring(2, 13);
+          this.props.onEndRecording(videoID);
           this.setState({ uploading: false, uploadSuccess: false, src: null });
         }
         else if (invocation.readyState == 4 && invocation.status == 200) {
