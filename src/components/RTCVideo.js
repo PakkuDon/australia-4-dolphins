@@ -101,15 +101,17 @@ class RTCVideo extends React.Component {
           console.log('Upload error');
           // TODO: Error handling
           // TODO: Remove arbitrary ID - used for testing purposes only
-          var videoID = Math.random().toString(36).substring(2, 13);
-          this.props.onEndRecording(videoID);
-          this.setState({ uploading: false, uploadSuccess: false, src: null });
+          this.setState({ uploading: false, uploadSuccess: false, src: null }, () => {
+            var videoID = Math.random().toString(36).substring(2, 13);
+            this.props.onEndRecording(videoID);
+          });
         }
         else if (invocation.readyState == 4 && invocation.status == 200) {
           console.log('Awesome stuff');
           var id = JSON.parse(invocation.responseText)['id'];
-          this.props.onEndRecording(id);
-          this.setState({ uploading: false, uploadSuccess: true, src: null });
+          this.setState({ uploading: false, uploadSuccess: true, src: null }, () => {
+            this.props.onEndRecording(id);
+          });
         }
       };
       console.log(process.env);
@@ -119,6 +121,7 @@ class RTCVideo extends React.Component {
       invocation.open('POST', "https://www.googleapis.com/upload/youtube/v3/videos?part=snippet", true);
       invocation.setRequestHeader('Authorization', 'Bearer ' + token);
       invocation.send(videoFile);
+
       /*
       var parameters = JSON.stringify({
         "snippet": { "title": "testing123"  },
@@ -134,7 +137,19 @@ class RTCVideo extends React.Component {
   }
 
   render() {
-    return(
+    var controls;
+    if (!this.state.isRecording) {
+      controls = (
+        <button onClick={this.startRecord}><img src='../../images/record-button.png' /></button>
+      );
+    }
+    else {
+      controls = (
+        <button onClick={this.stopRecord}><img src='../../images/stop-button.png' /></button>
+      );
+    }
+
+    return (
       <div className="recordrtc-video">
         <Webcam src={this.state.src}/>
         {this.state.uploading ?
@@ -144,11 +159,9 @@ class RTCVideo extends React.Component {
         {this.state.uploadSuccess==false ?
           <div>Upload failed :=(</div> : null}
 
-        <div className="row">
-          <Button bsStyle='primary' disabled={this.state.isRecording} onClick={this.startRecord}>Start Record</Button>
-          <Button bsStyle='danger' disabled={!this.state.isRecording} onClick={this.stopRecord}>Stop Record</Button>
+        <div className="row controls">
+          {controls}
         </div>
-        { /*<Modal show={this.state.uploadSuccess}><Modal.Body>Upload success!</Modal.Body></Modal> */ }
       </div>
     )
   }

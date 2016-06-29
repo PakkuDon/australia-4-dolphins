@@ -68,6 +68,7 @@ class VideoForm extends React.Component {
     this.setState({
       video_url: 'https://www.youtube.com/watch?v=' + id
     });
+    this.next();
   }
 
   render() {

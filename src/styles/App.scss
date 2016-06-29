@@ -77,10 +77,6 @@ body {
   min-width: 50vw;
 }
 
-.recordrtc-video {
-  text-align: center;
-}
-
 footer {
   margin-top: 20px;
 }
@@ -130,3 +126,20 @@ footer {
     text-decoration: none;
   }
 }
+
+.recordrtc-video {
+  padding: 5px;
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+}
+
+.controls {
+  button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+  }
+} 
