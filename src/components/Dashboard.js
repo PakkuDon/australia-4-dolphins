@@ -1,5 +1,5 @@
 import React from 'react';
-import SignatureItem from './SignatureItem';
+import SignatureItem from './Dashboard/SignatureItem';
 import Footer from './Footer';
 require('jquery');
 

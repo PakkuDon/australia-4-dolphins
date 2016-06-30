@@ -4,9 +4,9 @@ import { Button, Modal } from 'react-bootstrap';
 import RecordRTC from 'recordrtc';
 import 'gumadapter';
 
-import { captureUserMedia } from './AppUtils';
+import { captureUserMedia } from '../../AppUtils';
 import Webcam from './Webcam.react';
-var tokens = require('../../cfg/token');
+var tokens = require('../../../cfg/token');
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia || navigator.msGetUserMedia);

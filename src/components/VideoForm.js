@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import InstructionsPage from './InstructionsPage';
-import UserForm from './UserForm';
-import RTCVideo from './RTCVideo';
+import InstructionsPage from './VideoForm/InstructionsPage';
+import UserForm from './VideoForm/UserForm';
+import RTCVideo from './VideoForm/RTCVideo';
 
 class VideoForm extends React.Component {
   constructor(props) {
