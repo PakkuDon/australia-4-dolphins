@@ -30,10 +30,10 @@ var testData = [
   },
   {
     url: 'https://www.youtube.com/watch?v=-2xuO8JBepM'
-  },
+  }
 ];
 
-class AppComponent extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +83,7 @@ class AppComponent extends React.Component {
   }
 }
 
-AppComponent.defaultProps = {
+Home.defaultProps = {
 };
 
-export default AppComponent;
+export default Home;

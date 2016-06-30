@@ -75,6 +75,7 @@
     "react-d3-map": "^0.8.3",
     "react-dom": "^15.0.0",
     "react-forms": "beta",
+    "react-router": "^2.5.1",
     "recordrtc": "^5.3.8"
   }
 }
