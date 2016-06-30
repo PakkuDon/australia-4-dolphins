@@ -8,7 +8,7 @@ class SignatureItem extends React.Component {
     var videoID = url.parse(signature.url, true).query.v;
 
     return (
-      <div key={signature.id} className='signature-item'>
+      <div className='signature-item'>
         <div className='thumbnail'>
           <img src={`http://img.youtube.com/vi/${videoID}/default.jpg`} alt='thumbnail' />
         </div>

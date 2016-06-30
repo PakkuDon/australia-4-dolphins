@@ -8,6 +8,6 @@ import routes from './routes';
 ReactDOM.render(
   <Router history={hashHistory}>
     {routes}
-  </Router>, 
+  </Router>,
   document.getElementById('app')
 );

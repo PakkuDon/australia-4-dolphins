@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
   render() {
     var signatures = this.state.videos.map((video) => {
       return (
-        <SignatureItem signature={video} />
+        <SignatureItem key={video.id} signature={video} />
       );
     });
 

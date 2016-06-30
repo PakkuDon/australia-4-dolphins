@@ -38,7 +38,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       formVisible: false,
-      videos: []
+      videos: [],
+      intervalID: null
     };
 
     this.hideForm = this.hideForm.bind(this);
@@ -55,7 +56,17 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.updateVideos();
-    setInterval(this.updateVideos, 3000);
+    this.setState({
+      intervalID: setInterval(this.updateVideos, 3000)
+    });
+  }
+
+  componentWillUnmount() {
+    // Stop requesting video data on current component
+    clearInterval(this.state.intervalID);
+    this.setState({
+      intervalID: null
+    });
   }
 
   hideForm() {
