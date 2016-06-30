@@ -14,6 +14,13 @@ body {
   width: 80%;
 }
 
+header,
+footer {
+  background-color: $brandColor;
+  color: #FFF;
+  padding: 10px 20px;
+}
+
 .banner {
   background: url('../images/mb20.jpg');
   background-size: cover;
@@ -77,12 +84,7 @@ body {
   min-width: 50vw;
 }
 
-footer {
-  margin-top: 20px;
-}
-
-.signatures {
-  
+.signatures { 
   .video-player {
     height: 400px;
   }
@@ -117,9 +119,7 @@ footer {
 }
 
 footer {
-  background-color: $brandColor;
-  color: #FFF;
-  padding: 10px 20px;
+  margin-top: 20px;
   
   a {
     color: #FFF;
@@ -143,3 +143,15 @@ footer {
     background-color: transparent;
   }
 } 
+
+.signature-item {
+  padding: 5px;
+  border: 1px solid #AAA;
+  margin-top: 5px;
+  margin-bottom: 5pm;
+
+  .thumbnail, .details {
+    display: inline-block;
+    vertical-align: top;
+  }
+}

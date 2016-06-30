@@ -72,7 +72,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container index">
+      <div className="container">
         <Header onAdd={this.showForm} count={this.state.videos.length} />
         <SignatureList videos={this.state.videos} />
         <About />
