@@ -9,9 +9,12 @@ class Dashboard extends React.Component {
     this.state = {
       videos: []
     };
+
+    this.loadVideos = this.loadVideos.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentDidMount() {
+  loadVideos() {
     $.get('https://localhost:3000/api/videos')
     .done((data) => {
       this.setState({
@@ -20,10 +23,26 @@ class Dashboard extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.loadVideos();
+  }
+
+  handleDelete(id) {
+    // Delete selected video from database
+    $.ajax({
+      url: `https://localhost:3000/api/videos/${id}`,
+      method: 'DELETE'
+    })
+    .done((data) => {
+      this.loadVideos();
+    });
+  }
+
   render() {
     var signatures = this.state.videos.map((video) => {
       return (
-        <SignatureItem key={video.id} signature={video} />
+        <SignatureItem key={video.id} signature={video}
+          onDelete={this.handleDelete} />
       );
     });
 

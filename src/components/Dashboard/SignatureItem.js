@@ -1,8 +1,19 @@
 import React from 'react';
 import url from 'url';
 import moment from 'moment';
+import { Button } from 'react-bootstrap';
 
 class SignatureItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  onDelete() {
+    this.props.onDelete(this.props.signature.id);
+  }
+
   render() {
     var signature = this.props.signature;
     var videoID = url.parse(signature.url, true).query.v;
@@ -25,6 +36,9 @@ class SignatureItem extends React.Component {
             <dt>Date posted</dt>
             <dd>{moment(signature.created).format('MMM Do YYYY, h:mm A')}</dd>
           </dl>
+        </div>
+        <div className='actions'>
+          <Button bsStyle='danger' onClick={this.onDelete}>Delete</Button>
         </div>
       </div>
     );
