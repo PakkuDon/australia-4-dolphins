@@ -1,17 +1,17 @@
 import React from 'react';
 import url from 'url';
 import moment from 'moment';
-import { Button } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
 
 class SignatureItem extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onDelete = this.onDelete.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
-  onDelete() {
-    this.props.onDelete(this.props.signature.id);
+  onSelect(e) {
+    this.props.onSelect(this.props.signature.id, e.target.checked);
   }
 
   render() {
@@ -20,26 +20,28 @@ class SignatureItem extends React.Component {
 
     return (
       <div className='signature-item'>
-        <div className='thumbnail'>
-          <img src={`http://img.youtube.com/vi/${videoID}/default.jpg`} alt='thumbnail' />
-        </div>
-        <div className='details'>
-          <dl className='dl-horizontal'>
-            <dt>Name</dt>
-            <dd>{signature.first_name + ' ' + signature.last_name}</dd>
-            <dt>Email</dt>
-            <dd>{signature.email}</dd>
-            <dt>Phone</dt>
-            <dd>{signature.phone}</dd>
-            <dt>Post code</dt>
-            <dd>{signature.post_code}, {signature.country}</dd>
-            <dt>Date posted</dt>
-            <dd>{moment(signature.created).format('MMM Do YYYY, h:mm A')}</dd>
-          </dl>
-        </div>
-        <div className='actions'>
-          <Button bsStyle='danger' onClick={this.onDelete}>Delete</Button>
-        </div>
+        <Row>
+          <Col sm={1}>
+            <input type='checkbox' ref='selected' onChange={this.onSelect} />
+          </Col>
+          <Col sm={2}>
+            <img src={`http://img.youtube.com/vi/${videoID}/default.jpg`} alt='thumbnail' />
+          </Col>
+          <Col sm={9}>
+            <dl className='dl-horizontal'>
+              <dt>Name</dt>
+              <dd>{signature.first_name + ' ' + signature.last_name}</dd>
+              <dt>Email</dt>
+              <dd>{signature.email}</dd>
+              <dt>Phone</dt>
+              <dd>{signature.phone}</dd>
+              <dt>Post code</dt>
+              <dd>{signature.post_code}, {signature.country}</dd>
+              <dt>Date posted</dt>
+              <dd>{moment(signature.created).format('MMM Do YYYY, h:mm A')}</dd>
+            </dl>
+          </Col>
+        </Row>
       </div>
     );
   }
