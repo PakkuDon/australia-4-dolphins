@@ -135,12 +135,18 @@ footer {
 }
 
 .controls {
+  display: flex;
   button {
     width: 36px;
     height: 36px;
     padding: 0;
     border: 0;
     background-color: transparent;
+  }
+
+  .progress {
+    flex: 1 1 auto;
+    margin: 5px;
   }
 } 
 

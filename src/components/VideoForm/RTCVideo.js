@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, ProgressBar } from 'react-bootstrap';
 
 import RecordRTC from 'recordrtc';
 import 'gumadapter';
@@ -11,6 +11,9 @@ var tokens = require('../../../cfg/token');
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
+// Cut-off time for recordings in ms
+const recordTimeLimit = 30000;
+
 class RTCVideo extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +22,12 @@ class RTCVideo extends React.Component {
       isRecording: false,
       recordVideo: null,
       src: null,
+      startTime: null,
       uploadSuccess: null,
       uploading: false,
-      stream: null
+      stream: null,
+      intervalID: 0,
+      elapsed: 0
     };
 
     this.requestUserMedia = this.requestUserMedia.bind(this);
@@ -60,8 +66,15 @@ class RTCVideo extends React.Component {
 
   startRecord() {
     this.state.stream.stop();
+
     captureUserMedia((stream) => {
       this.setState({ 
+        startTime: Date.now(),
+        intervalID: setInterval(() => {
+          this.setState({
+            elapsed: Date.now() - this.state.startTime
+          });
+        }, 100),
         src: window.URL.createObjectURL(stream),
         stream: stream,
         isRecording: true
@@ -73,11 +86,18 @@ class RTCVideo extends React.Component {
     this.timeout = setTimeout(() => {
       this.stopRecord();
       this.timeout = null;
-    }, 30000);
+    }, recordTimeLimit);
   }
 
   stopRecord() {
     this.state.stream.stop();
+    clearInterval(this.state.intervalID);
+
+    this.setState({
+      startTime: null,
+      intervalID: 0
+    });
+
     this.state.recordVideo.stopRecording(() => {
       if (this.timeout){
         clearTimeout(this.timeout);
@@ -137,14 +157,14 @@ class RTCVideo extends React.Component {
   }
 
   render() {
-    var controls;
+    var playerBtn;
     if (!this.state.isRecording) {
-      controls = (
+      playerBtn = (
         <button onClick={this.startRecord}><img src='../../images/record-button.png' /></button>
       );
     }
     else {
-      controls = (
+      playerBtn = (
         <button onClick={this.stopRecord}><img src='../../images/stop-button.png' /></button>
       );
     }
@@ -159,8 +179,12 @@ class RTCVideo extends React.Component {
         {this.state.uploadSuccess==false ?
           <div>Upload failed :=(</div> : null}
 
-        <div className="row controls">
-          {controls}
+        <div className="controls">
+          {playerBtn}
+          <ProgressBar now={Math.ceil(this.state.elapsed / recordTimeLimit * 100)} />
+          <time>
+            0:{('0' + Math.ceil(this.state.elapsed / 1000)).slice(-2)}
+          </time>
         </div>
       </div>
     )
