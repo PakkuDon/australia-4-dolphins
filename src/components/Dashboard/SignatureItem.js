@@ -25,7 +25,9 @@ class SignatureItem extends React.Component {
             <input type='checkbox' ref='selected' onChange={this.onSelect} />
           </Col>
           <Col sm={2}>
-            <img src={`http://img.youtube.com/vi/${videoID}/default.jpg`} alt='thumbnail' />
+            <a target='_blank' href={`http://www.youtube.com/watch?v=${videoID}`}>
+              <img src={`http://img.youtube.com/vi/${videoID}/default.jpg`} alt='thumbnail' />
+            </a>
           </Col>
           <Col sm={9}>
             <dl className='dl-horizontal'>
@@ -40,6 +42,14 @@ class SignatureItem extends React.Component {
               <dt>Date posted</dt>
               <dd>{moment(signature.created).format('MMM Do YYYY, h:mm A')}</dd>
             </dl>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12}>
+            <a target='_blank' className='twitter-share-button'
+              href={`https://twitter.com/intent/tweet?url=https://youtu.be/${videoID}`}>
+              Tweet
+            </a>
           </Col>
         </Row>
       </div>

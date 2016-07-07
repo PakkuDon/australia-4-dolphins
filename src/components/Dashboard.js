@@ -1,5 +1,6 @@
 import async from 'async';
 import React from 'react';
+import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 import SignatureItem from './Dashboard/SignatureItem';
 import DeleteConfirmationForm from './Dashboard/DeleteConfirmationForm';
@@ -101,6 +102,9 @@ class Dashboard extends React.Component {
         <header>
           <h1>Dashboard</h1>
         </header>
+        <p>
+          <Link to={'/'}>Back to index</Link>
+        </p>
         <h2>Past signatures</h2>
         <Button bsStyle='danger' disabled={this.state.selected.length == 0} 
           onClick={this.showForm}>Delete selected items</Button>
