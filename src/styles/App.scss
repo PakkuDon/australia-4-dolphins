@@ -21,56 +21,89 @@ footer {
   padding: 10px 20px;
 }
 
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
 .banner {
-  background: url('../images/mb20.jpg');
+  background: url('../images/mike-baird-image.jpg');
   background-size: cover;
   background-position: center;
   color: #FFF;
   position: relative;
-  margin-bottom: 3em;
-  
-  h1 {
-    margin: 0px 10px;
-    font-weight: bold;
+  height: 500px;
+
+  .header-content {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px;
+  }
+
+  .signature-count,
+  .record-btn {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2em;
+    width: 600px;
+    text-align: center;
+    text-transform: uppercase;
   }
   
-  .count {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2em;
-    font-weight: bold;
-    color: #F90;
+  .signature-count {
+    background-color: #000;
   }
   
   .record-btn {
-    text-align: center;
     background-color: $activeColor;
-    text-transform: uppercase;
-    border: 5px solid darken($activeColor, 5%);
-    padding: 0.5em 2em;
-    font-size: 200%;
-    margin-top: 2.5em;
+    border-color: transparent;
     
     &:hover,
     &:active {
       background-color: lighten($activeColor, 10%);
     }
   }
-  
-  @media (max-width: 1200px) {
-    .record-btn {
-      margin-top: 2em;
+
+  @media (max-width: 769px) {
+    & {
+      height: 400px;
     }
   }
-  
-  @media (max-width: 1000px) {
+
+  @media (max-width: 661px) {
+    & {
+      height: 350px;
+    }
+
+    .signature-count,
     .record-btn {
-      margin-top: 1em;
+      font-size: 1.5em;
+      width: 100%;
     }
   }
-  
-  @media (max-width: 750px) {
+
+  @media (max-width: 481px) {
+    & {
+      height: 280px;
+    }
+
+    .signature-count,
     .record-btn {
-      font-size: 125%;
+      font-size: 1.25em;
+    }
+  }
+
+  @media (max-width: 341px) {
+    & {
+      height: 250px;
+    }
+
+    .signature-count,
+    .record-btn {
+      font-size: 1em;
     }
   }
 }

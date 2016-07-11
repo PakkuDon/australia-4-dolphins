@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+var aboutImg = require('../../images/mb20.jpg');
 
 class About extends React.Component {
   render() {
@@ -20,7 +21,7 @@ class About extends React.Component {
               </p>
             </Col>
             <Col sm={6}>
-              <img width='100%' src='../images/mb20.jpg' />
+              <img width='100%' src={aboutImg} />
             </Col>
           </Row>
         </div>
