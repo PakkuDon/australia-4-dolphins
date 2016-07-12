@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import InstructionsPage from './VideoForm/InstructionsPage';
 import UserForm from './VideoForm/UserForm';
 import RTCVideo from './VideoForm/RTCVideo';
+import $ from 'jquery';
 
 class VideoForm extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class VideoForm extends React.Component {
         <UserForm dataCb={this.getData}> </UserForm>
       ],
       current: 0,
-      formData: {},
+      formData: {}
     }
   }
 
@@ -49,11 +50,11 @@ class VideoForm extends React.Component {
     post_data['country'] = fd['country'] || 'AU';
     post_data['phone'] = fd['phone'];
     post_data['post_code'] = fd['postCode'] || '3000';
-    console.log(post_data);
+
     // POST to API
     $.post('https://localhost:3000/api/videos/', post_data)
       .done(() => {
-        console.log('Sucess!');
+        // TODO: Confirmation message
     });
     this.props.onHide();
   }
@@ -72,12 +73,12 @@ class VideoForm extends React.Component {
   }
 
   render() {
-    var nextBtn = this.state.current < this.state.panels.length - 1? 
-      { handler: this.next, text: 'Next' } : 
+    var nextBtn = this.state.current < this.state.panels.length - 1 ?
+      { handler: this.next, text: 'Next' } :
       { handler: this.submitVideo, text: 'Submit video' };
     
     return (
-      <Modal backdrop='static' show={this.props.visible} 
+      <Modal backdrop='static' show={this.props.visible}
         onHide={this.props.onHide} onExited={this.reset} dialogClassName="my-modal">
         <Modal.Header closeButton>
         </Modal.Header>

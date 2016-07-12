@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import SignatureItem from './Dashboard/SignatureItem';
 import DeleteConfirmationForm from './Dashboard/DeleteConfirmationForm';
 import Footer from './Footer';
-require('jquery');
+import $ from 'jquery';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
         .done((data) => {
           callback(true);
         });
-      }); 
+      });
     });
     
     // TODO: Error handling
@@ -106,12 +106,12 @@ class Dashboard extends React.Component {
           <Link to={'/'}>Back to index</Link>
         </p>
         <h2>Past signatures</h2>
-        <Button bsStyle='danger' disabled={this.state.selected.length == 0} 
+        <Button bsStyle='danger' disabled={this.state.selected.length == 0}
           onClick={this.showForm}>Delete selected items</Button>
         <div className='signature-list'>
           {signatures}
         </div>
-        <DeleteConfirmationForm visible={this.state.formVisible} 
+        <DeleteConfirmationForm visible={this.state.formVisible}
           onHide={this.hideForm} onConfirm={this.handleDelete} />
         <Footer />
       </div>

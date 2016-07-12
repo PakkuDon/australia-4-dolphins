@@ -1,7 +1,7 @@
 import React from 'react';
 import url from 'url';
 import moment from 'moment';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 class SignatureItem extends React.Component {
   constructor(props) {

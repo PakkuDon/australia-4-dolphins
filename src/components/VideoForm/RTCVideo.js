@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ProgressBar } from 'react-bootstrap';
+import { ProgressBar } from 'react-bootstrap';
 
 import RecordRTC from 'recordrtc';
 import 'gumadapter';
@@ -37,7 +37,7 @@ class RTCVideo extends React.Component {
 
   componentDidMount() {
     if(!hasGetUserMedia) {
-      alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
+      alert('Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.');
       return;
     }
     this.requestUserMedia();
@@ -48,18 +48,16 @@ class RTCVideo extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props.captureDevice);
     if (!props.captureDevice){
-      console.log('setting src to null');
-      this.setState({src: null});
+      this.setState({ src: null });
     }
   }
 
   requestUserMedia() {
     captureUserMedia((stream) => {
-      this.setState({ 
+      this.setState({
         src: window.URL.createObjectURL(stream),
-        stream: stream 
+        stream: stream
       });
     });
   }
@@ -68,7 +66,7 @@ class RTCVideo extends React.Component {
     this.state.stream.stop();
 
     captureUserMedia((stream) => {
-      this.setState({ 
+      this.setState({
         startTime: Date.now(),
         intervalID: setInterval(() => {
           this.setState({
@@ -103,16 +101,11 @@ class RTCVideo extends React.Component {
         clearTimeout(this.timeout);
         this.timeout = null;
       }
-      let params = {
-        type: 'video/webm',
-        data: this.state.recordVideo.blob,
-        id: Math.floor(Math.random()*90000) + 10000
-      }
 
-      this.setState({ 
-        uploading: true, 
-        isRecording: false, 
-        src: URL.createObjectURL(this.state.recordVideo.blob) 
+      this.setState({
+        uploading: true,
+        isRecording: false,
+        src: URL.createObjectURL(this.state.recordVideo.blob)
       });
 
       var invocation = new XMLHttpRequest();
@@ -135,10 +128,10 @@ class RTCVideo extends React.Component {
         }
       };
       console.log(process.env);
-      var videoFile =  new File([this.state.recordVideo.blob], "video.mp4");
+      var videoFile =  new File([this.state.recordVideo.blob], 'video.mp4');
       var token = tokens.access_token;
       console.log(token);
-      invocation.open('POST', "https://www.googleapis.com/upload/youtube/v3/videos?part=snippet", true);
+      invocation.open('POST', 'https://www.googleapis.com/upload/youtube/v3/videos?part=snippet', true);
       invocation.setRequestHeader('Authorization', 'Bearer ' + token);
       invocation.send(videoFile);
 
@@ -170,7 +163,7 @@ class RTCVideo extends React.Component {
     }
 
     return (
-      <div className="recordrtc-video">
+      <div className='recordrtc-video'>
         <Webcam src={this.state.src}/>
         {this.state.uploading ?
           <div>Uploading...</div> : null}
@@ -179,7 +172,7 @@ class RTCVideo extends React.Component {
         {this.state.uploadSuccess==false ?
           <div>Upload failed :=(</div> : null}
 
-        <div className="controls">
+        <div className='controls'>
           {playerBtn}
           <ProgressBar now={Math.ceil(this.state.elapsed / recordTimeLimit * 100)} />
           <time>
