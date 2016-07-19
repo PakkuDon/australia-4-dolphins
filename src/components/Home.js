@@ -5,6 +5,7 @@ import $ from 'jquery';
 import React from 'react';
 import Header from './Home/Header';
 import SignatureList from './Home/SignatureList';
+import CountryStatistics from './Home/CountryStatistics';
 import About from './Home/About';
 import Footer from './Footer';
 import VideoForm from './VideoForm';
@@ -60,10 +61,11 @@ class Home extends React.Component {
   render() {
     return (
       <div className="container">
+        <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
         <Header onAdd={this.showForm} count={this.state.videos.length} />
         <SignatureList videos={this.state.videos} />
         <About />
-        <VideoForm visible={this.state.formVisible} onHide={this.hideForm} />
+        <CountryStatistics />
         <Footer />
       </div>
     );
