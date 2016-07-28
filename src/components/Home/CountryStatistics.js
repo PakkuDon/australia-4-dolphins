@@ -9,11 +9,6 @@ class CountryStatistics extends React.Component {
     this.state = {
       top_states: [
         'Victoria', 'New South Wales', 'Queensland'
-      ],
-      markers: [
-        [-37.8086538,144.9629293],
-        [-27.28, 153.02],
-        [-33.51, 151.12]
       ]
     };
   }
@@ -27,7 +22,7 @@ class CountryStatistics extends React.Component {
             <TopStatesList states={this.state.top_states} />
           </Col>
           <Col sm={8}>
-            <SignatureMap markers={this.state.markers} />
+            <SignatureMap signatures={this.props.signatures} />
           </Col>
         </Row>
       </div>

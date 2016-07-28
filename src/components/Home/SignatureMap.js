@@ -6,9 +6,9 @@ require('leaflet/dist/leaflet.css');
 const position = [-37.8086538,144.9629293];
 class SignatureMap extends React.Component {
   render() {
-    var markers = this.props.markers.map((marker) => {
+    var markers = this.props.signatures.map((signature) => {
       return (
-        <Marker key={marker} position={marker}></Marker>
+        <Marker key={signature.id} position={signature.location}></Marker>
       );
     });
 

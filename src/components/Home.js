@@ -65,7 +65,7 @@ class Home extends React.Component {
         <Header onAdd={this.showForm} count={this.state.videos.length} />
         <SignatureList videos={this.state.videos} />
         <About />
-        <CountryStatistics />
+        <CountryStatistics signatures={this.state.videos} />
         <Footer />
       </div>
     );
