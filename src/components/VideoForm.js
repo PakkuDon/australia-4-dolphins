@@ -40,6 +40,7 @@ class VideoForm extends React.Component {
 
   // Add signature to DB, reset form
   submitVideo() {
+    // TODO: Validation
     var fd = this.state.formData;
     var post_data = {};
     post_data['url'] = this.state.video_url;
@@ -51,12 +52,23 @@ class VideoForm extends React.Component {
     post_data['phone'] = fd['phone'];
     post_data['post_code'] = fd['postCode'] || '3000';
 
-    // POST to API
-    $.post('https://localhost:3000/api/videos/', post_data)
+    // Geocode provided location data
+    $.ajax({
+      url: `https://maps.googleapis.com/maps/api/geocode/json?version=3&address=${post_data.post_code},%20${post_data.country}`,
+      method: 'GET'
+    })
+    .done((data) => {
+      post_data.location = data.results[0].geometry.location;
+      // POST to API
+      $.post('https://localhost:3000/api/videos/', post_data)
       .done(() => {
         // TODO: Confirmation message
+        this.props.onHide();
+      })
+      .fail((jqXHR) => {
+        // TODO: Error message
+      });
     });
-    this.props.onHide();
   }
   
   next() {
