@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import InstructionsPage from './VideoForm/InstructionsPage';
 import UserForm from './VideoForm/UserForm';
 import RTCVideo from './VideoForm/RTCVideo';
+import ShareScreen from './VideoForm/ShareScreen';
 import $ from 'jquery';
 
 class VideoForm extends React.Component {
@@ -24,6 +25,10 @@ class VideoForm extends React.Component {
       current: 0,
       formData: {}
     }
+
+    this.state.panels.push(
+      <ShareScreen url={this.state.video_url} />
+    );
   }
 
   reset() {

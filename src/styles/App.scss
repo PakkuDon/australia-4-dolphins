@@ -195,3 +195,34 @@ footer {
     height: 400px;
     width: 100%;
 }
+
+a.share-button {
+  display: block;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  color: #FFF;
+  max-width: 260px;
+  margin: auto;
+  margin-top: 5px;
+  
+  &:hover {
+    color: #FFF;
+    text-decoration: none;
+  }
+
+  &.share-twitter {
+    background-color: #1B95E0;
+
+    &:hover {
+      background-color: #0C7ABF;
+    }
+  }
+
+  &.share-facebook {
+    background-color: #4267B2;
+
+    &:hover {
+      background-color: #365899;
+    }
+  }
+}
