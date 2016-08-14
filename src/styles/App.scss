@@ -115,6 +115,13 @@ footer {
 
 .my-modal {
   min-width: 50vw;
+
+  footer {
+    margin-top: 5px;
+    padding: 10px;
+    text-align: right;
+    background-color: transparent;
+  }
 }
 
 .signatures { 

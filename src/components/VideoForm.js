@@ -4,6 +4,8 @@ import InstructionsPage from './VideoForm/InstructionsPage';
 import UserForm from './VideoForm/UserForm';
 import RTCVideo from './VideoForm/RTCVideo';
 import ShareScreen from './VideoForm/ShareScreen';
+import Wizard from './Wizard/Wizard';
+import WizardPage from './Wizard/WizardPage';
 import $ from 'jquery';
 
 class VideoForm extends React.Component {
@@ -17,18 +19,9 @@ class VideoForm extends React.Component {
     
     this.state = {
       video_url: '',
-      panels: [
-        <InstructionsPage />,
-        <RTCVideo captureDevice={this.props.formVisible} onEndRecording={this.handleEndRecording}></RTCVideo>,
-        <UserForm dataCb={this.getData}> </UserForm>
-      ],
       current: 0,
       formData: {}
     }
-
-    this.state.panels.push(
-      <ShareScreen url={this.state.video_url} />
-    );
   }
 
   reset() {
@@ -68,7 +61,7 @@ class VideoForm extends React.Component {
       $.post('https://localhost:3000/api/videos/', post_data)
       .done(() => {
         // TODO: Confirmation message
-        this.props.onHide();
+        this.next();
       })
       .fail((jqXHR) => {
         // TODO: Error message
@@ -90,22 +83,33 @@ class VideoForm extends React.Component {
   }
 
   render() {
-    var nextBtn = this.state.current < this.state.panels.length - 1 ?
-      { handler: this.next, text: 'Next' } :
-      { handler: this.submitVideo, text: 'Submit video' };
-    
     return (
-      <Modal backdrop='static' show={this.props.visible}
-        onHide={this.props.onHide} onExited={this.reset} dialogClassName="my-modal">
+      <Modal backdrop='static' 
+        show={this.props.visible}
+        onHide={this.props.onHide} 
+        onExited={this.reset} 
+        dialogClassName="my-modal">
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
-          {this.state.panels[this.state.current]}
+          <Wizard current_index={this.state.current}>
+            <WizardPage onConfirm={{ text: 'Next', handler: this.next }} 
+              onCancel={{ text: 'Cancel', handler: this.props.onHide }}>
+              <InstructionsPage />
+            </WizardPage>
+            <WizardPage onCancel={{ text: 'Cancel', handler: this.props.onHide }}>
+              <RTCVideo captureDevice={this.props.formVisible} 
+                onEndRecording={this.handleEndRecording}></RTCVideo>
+            </WizardPage>
+            <WizardPage onConfirm={{ text: 'Submit video', handler: this.submitVideo }} 
+              onCancel={{ text: 'Cancel', handler: this.props.onHide }}>
+              <UserForm dataCb={this.getData}></UserForm>
+            </WizardPage>
+            <WizardPage onConfirm={{ text: 'Close', handler: this.props.onHide }}>
+              <ShareScreen url={this.state.video_url} />
+            </WizardPage>
+          </Wizard>
         </Modal.Body>
-        <Modal.Footer>
-          <Button bsStyle='danger' onClick={this.props.onHide}>Cancel</Button>
-          <Button bsStyle='primary' onClick={nextBtn.handler}>{nextBtn.text}</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
