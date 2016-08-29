@@ -27,15 +27,12 @@ footer {
   left: 0;
   width: 100px;
   height: 100px;
+  Z-index: 1;
 }
 
 .banner {
-  background: url('../images/mike-baird-image.jpg');
-  background-size: cover;
-  background-position: center;
   color: #FFF;
   position: relative;
-  height: 500px;
 
   .header-content {
     position: absolute;
@@ -67,15 +64,11 @@ footer {
     }
   }
 
-  @media (max-width: 769px) {
-    & {
-      height: 400px;
-    }
-  }
-
   @media (max-width: 661px) {
-    & {
-      height: 350px;
+    .header-content {
+      position: static;
+      width: 100%;
+      padding: 0;
     }
 
     .signature-count,
@@ -86,21 +79,18 @@ footer {
   }
 
   @media (max-width: 481px) {
-    & {
-      height: 280px;
-    }
-
     .signature-count,
     .record-btn {
       font-size: 1.25em;
     }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
   }
 
   @media (max-width: 341px) {
-    & {
-      height: 250px;
-    }
-
     .signature-count,
     .record-btn {
       font-size: 1em;
